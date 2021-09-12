@@ -24,8 +24,8 @@ public class Level_03_Login_Page_Object {
 
 	@BeforeClass
 	public void initBrowser() {
-		emailAddress = getEmailRandom();
-		password = "123456";
+		emailAddress = "automation@gmail.com";
+		password = "123123";
 
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
@@ -75,7 +75,7 @@ public class Level_03_Login_Page_Object {
 	@Test
 	public void Login_05_Incorrect_Password() {
 		loginPage.getRefreshPage(driver);
-		loginPage.loginToSystem(driver, "automation@gmail.com", password);
+		loginPage.loginToSystem(driver, emailAddress, "123456");
 
 		Assert.assertTrue(loginPage.isIncorrectMessageDisplayed());
 	}
