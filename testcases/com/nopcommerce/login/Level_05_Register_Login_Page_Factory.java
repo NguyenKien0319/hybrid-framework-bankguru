@@ -15,7 +15,7 @@ import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
 import pageObjects.nopCommerce.RegisterPageObject;
 
-public class Level_04_Register_Login_Page_Object extends BaseTest{
+public class Level_05_Register_Login_Page_Factory extends BaseTest{
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
