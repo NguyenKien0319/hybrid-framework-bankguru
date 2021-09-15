@@ -7,11 +7,11 @@
 		<parameter name="browser" value="firefox" />
 		<classes>
 			<class
-				name="com.nopcommerce.login.Level_04_Register_Login_Multi_Browser" />
+				name="com.nopcommerce.login.Level_06_Register_Login_PageGeneratorManagement"/>
 		</classes>
 	</test>
 
-	<test name="RUN ON CHROME">
+	<!-- <test name="RUN ON CHROME">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
@@ -25,5 +25,5 @@
 			<class
 				name="com.nopcommerce.login.Level_04_Register_Login_Multi_Browser" />
 		</classes>
-	</test>
+	</test> -->
 </suite> 
