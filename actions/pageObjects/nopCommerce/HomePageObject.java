@@ -26,5 +26,9 @@ public class HomePageObject extends BasePage {
 		clickToElement(driver, HomePageUI.LOGIN_LINK);
 		return PageGeneratorManagement.getLoginPage(driver);
 	}
+	public void clickLogoutButton() {
+		waitForElementClickable(driver, HomePageUI.LOGOUT_LINK);
+		clickToElement(driver, HomePageUI.LOGOUT_LINK);
+	}
 	
 }

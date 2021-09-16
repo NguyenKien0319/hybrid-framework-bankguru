@@ -69,10 +69,6 @@ public class Level_05_Register_Login_Page_Factory extends BaseTest{
 		driver.close();
 	}
 	
-	public String getEmailRandom() {
-		Random rand = new Random();
-		return "testing" + rand.nextInt(999999) + "@hotmail.net";
-	}
 	HomePageObject homePage;
 	RegisterPageObject registerPage;
 	LoginPageObject loginPage;

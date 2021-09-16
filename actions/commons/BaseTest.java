@@ -1,5 +1,6 @@
 package commons;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ public class BaseTest {
 	private WebDriver driver;
 	private String projectPath = System.getProperty("user.dir");
 
-	public WebDriver getBrowserDriver(String browserName, String appUrl) {
+	protected WebDriver getBrowserDriver(String browserName, String appUrl) {
 		if (browserName.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
@@ -28,5 +29,10 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		driver.get(appUrl);
 		return driver;
+	}
+	
+	protected String getEmailRandom() {
+		Random rand = new Random();
+		return "testing" + rand.nextInt(999999) + "@hotmail.net";
 	}
 }

@@ -16,6 +16,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.nopCommerce.MyAccountPageObject;
+import pageObjects.nopCommerce.NewsPageObject;
+import pageObjects.nopCommerce.PageGeneratorManagement;
+import pageObjects.nopCommerce.SearchPageObject;
+import pageObjects.nopCommerce.SiteMapPageObject;
+import pageObjects.nopCommerce.WishListPageObject;
+import pageUIs.nopCommerce.BasePageUI;
+
 public class BasePage {
 	public void openUrlPage(WebDriver driver, String pageUrl) {
 		driver.get(pageUrl);
@@ -332,7 +340,7 @@ public class BasePage {
 		}
 	}
 
-	public void waitForElementVisible(WebDriver driver, String locator) {
+	protected void waitForElementVisible(WebDriver driver, String locator) {
 		explicitWait = new WebDriverWait(driver, timeouts);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
 	}
@@ -342,7 +350,7 @@ public class BasePage {
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(locator)));
 	}
 
-	public void waitForElementClickable(WebDriver driver, String locator) {
+	protected void waitForElementClickable(WebDriver driver, String locator) {
 		explicitWait = new WebDriverWait(driver, timeouts);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
 	}
@@ -358,6 +366,37 @@ public class BasePage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	public SiteMapPageObject openSiteMapPage(WebDriver driver) {
+		waitForAllElementsVisible(driver, BasePageUI.SITE_MAP_LINK);
+		clickToElement(driver, BasePageUI.SITE_MAP_LINK);
+		return PageGeneratorManagement.getSiteMapPage(driver);
+	}
+
+	public SearchPageObject openSearchPage(WebDriver driver) {
+		waitForAllElementsVisible(driver, BasePageUI.SEARCH_LINK);
+		clickToElement(driver, BasePageUI.SEARCH_LINK);
+		return PageGeneratorManagement.getSearchPage(driver);
+	}
+
+	public WishListPageObject openWishListPage(WebDriver driver) {
+		waitForAllElementsVisible(driver, BasePageUI.WISH_LIST_LINK);
+		clickToElement(driver, BasePageUI.WISH_LIST_LINK);
+		return PageGeneratorManagement.getWishListPage(driver);
+	}
+
+	public NewsPageObject openNewsPage(WebDriver driver) {
+		waitForAllElementsVisible(driver, BasePageUI.NEWS_LINK);
+		clickToElement(driver, BasePageUI.NEWS_LINK);
+		return PageGeneratorManagement.getNewsPage(driver);
+	}
+
+	public MyAccountPageObject openMyAccountPage(WebDriver driver) {
+		waitForAllElementsVisible(driver, BasePageUI.MY_ACCOUNT_LINK);
+		clickToElement(driver, BasePageUI.MY_ACCOUNT_LINK);
+		return PageGeneratorManagement.getMyAccountPage(driver);
 	}
 
 	private Alert alert;

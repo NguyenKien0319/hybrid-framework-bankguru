@@ -7,15 +7,7 @@
 		<parameter name="browser" value="firefox" />
 		<classes>
 			<class
-				name="com.nopcommerce.login.Level_06_Register_Login_PageGeneratorManagement"/>
-		</classes>
-	</test>
-
-	<!-- <test name="RUN ON CHROME">
-		<parameter name="browser" value="chrome" />
-		<classes>
-			<class
-				name="com.nopcommerce.login.Level_04_Register_Login_Multi_Browser" />
+				name="com.nopcommerce.login.Level_07_Register_Login_Page_Switch_Page"/>
 		</classes>
 	</test>
 
@@ -23,7 +15,15 @@
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
-				name="com.nopcommerce.login.Level_04_Register_Login_Multi_Browser" />
+				name="com.nopcommerce.login.Level_07_Register_Login_Page_Switch_Page" />
 		</classes>
-	</test> -->
+	</test>
+
+	<test name="RUN ON CHROME">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class
+				name="com.nopcommerce.login.Level_07_Register_Login_Page_Switch_Page" />
+		</classes>
+	</test>
 </suite> 
