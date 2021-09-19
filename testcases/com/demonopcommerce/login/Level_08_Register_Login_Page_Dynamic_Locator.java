@@ -1,4 +1,4 @@
-package com.nopcommerce.login;
+package com.demonopcommerce.login;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -60,12 +60,12 @@ public class Level_08_Register_Login_Page_Dynamic_Locator extends BaseTest {
 
 	@Test
 	public void Login_02_Login_To_System() {
-		loginPage = homePage.clickToLoginButton();
+		loginPage = homePage.clickToLoginButtonToOpen();
 
 		loginPage.inputEmailTextBox(emailAddress);
 		loginPage.inputPasswordTextBox(password);
 
-		homePage = loginPage.clickLoginButton();
+		homePage = loginPage.clickLoginButtonToOpenPage();
 		System.out.println(homePage.hashCode());
 
 		Assert.assertTrue(homePage.isSliderDisplayed());

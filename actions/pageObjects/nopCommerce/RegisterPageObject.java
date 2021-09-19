@@ -62,4 +62,19 @@ public class RegisterPageObject extends BasePage {
 		return PageGeneratorManagement.getHomePage(driver);
 	}
 
+	public boolean isErrorMessageDisplay(WebDriver driver,String value, String errorMessage) {
+		waitForElementVisible(driver, RegisterPageUI.DYNAMIC_REQUIRED_MESSAGE, value, errorMessage );
+		return isElementDisplayed(driver, RegisterPageUI.DYNAMIC_REQUIRED_MESSAGE, value , errorMessage);
+	}
+
+	public boolean isErrorEmailMessageDisplayed() {
+		waitForElementVisible(driver, RegisterPageUI.ERROR_EMAIL_REGISTED_MESSAGE);
+		return isElementDisplayed(driver, RegisterPageUI.ERROR_EMAIL_REGISTED_MESSAGE);
+	}
+
+	public boolean isInvalidPasswordMessageDispplayed() {
+		waitForElementVisible(driver, RegisterPageUI.INVALID_PASSWORD_MESSAGE);
+		return isElementDisplayed(driver, RegisterPageUI.INVALID_PASSWORD_MESSAGE);
+	}
+
 }

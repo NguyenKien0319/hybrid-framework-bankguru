@@ -1,7 +1,4 @@
-package com.nopcommerce.login;
-
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+package com.demonopcommerce.login;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,7 +12,7 @@ import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
 import pageObjects.nopCommerce.RegisterPageObject;
 
-public class Level_05_Register_Login_Page_Factory extends BaseTest{
+public class Level_04_Register_Login_Multi_Browser extends BaseTest{
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
@@ -54,11 +51,10 @@ public class Level_05_Register_Login_Page_Factory extends BaseTest{
 	
 	@Test
 	public void Login_02_Login_To_System() {
-		homePage.clickToLoginButton();
-		loginPage = new LoginPageObject(driver);
+		loginPage = homePage.clickToLoginButtonToOpen();
 		loginPage.inputEmailTextBox(emailAddress);
 		loginPage.inputPasswordTextBox(password);
-		loginPage.clickLoginButton();
+		loginPage.clickLoginButtonToOpenPage();
 		
 		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isSliderDisplayed());

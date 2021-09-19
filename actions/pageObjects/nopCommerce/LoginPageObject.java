@@ -21,10 +21,30 @@ public class LoginPageObject extends BasePage {
 		sendkeysToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
-	public HomePageObject clickLoginButton() {
+	public HomePageObject clickLoginButtonToOpenPage() {
 		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
 		return PageGeneratorManagement.getHomePage(driver);
+	}
+
+	public void clickLoginButton() {
+		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
+		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+	}
+
+	public boolean isErrorEmailMessageDisplayed(WebDriver driver, String errorText) {
+		waitForElementVisible(driver, LoginPageUI.DYNAMIC_ERROR_EMAIL_MESSAGE, errorText);
+		return isElementDisplayed(driver, LoginPageUI.DYNAMIC_ERROR_EMAIL_MESSAGE, errorText);
+	}
+
+	public boolean isErrorMessageDisplayed(WebDriver driver, String errorText) {
+		waitForElementVisible(driver, LoginPageUI.DYNAMIC_ERROR_MESSAGE, errorText);
+		return isElementDisplayed(driver, LoginPageUI.DYNAMIC_ERROR_MESSAGE, errorText);
+	}
+
+	public void clickLoginHeaderLink() {
+		waitForElementVisible(driver, LoginPageUI.LOGIN_LINK);
+		clickToElement(driver, LoginPageUI.LOGIN_LINK);
 	}
 
 }

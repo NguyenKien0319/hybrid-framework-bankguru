@@ -1,4 +1,6 @@
-package com.nopcommerce.login;
+package com.demonopcommerce.login;
+
+import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -10,15 +12,10 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
-import pageObjects.nopCommerce.MyAccountPageObject;
-import pageObjects.nopCommerce.NewsPageObject;
 import pageObjects.nopCommerce.PageGeneratorManagement;
 import pageObjects.nopCommerce.RegisterPageObject;
-import pageObjects.nopCommerce.SearchPageObject;
-import pageObjects.nopCommerce.SiteMapPageObject;
-import pageObjects.nopCommerce.WishListPageObject;
 
-public class Level_07_Register_Login_Page_Switch_Page extends BaseTest{
+public class Level_06_Register_Login_PageGeneratorManagement extends BaseTest{
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
@@ -60,38 +57,15 @@ public class Level_07_Register_Login_Page_Switch_Page extends BaseTest{
 	
 	@Test
 	public void Login_02_Login_To_System() {
-		loginPage = homePage.clickToLoginButton();
+		loginPage = homePage.clickToLoginButtonToOpen();
 
 		loginPage.inputEmailTextBox(emailAddress);
 		loginPage.inputPasswordTextBox(password);
 		
-		homePage = loginPage.clickLoginButton();
+		homePage = loginPage.clickLoginButtonToOpenPage();
 		System.out.println(homePage.hashCode());
 
 		Assert.assertTrue(homePage.isSliderDisplayed());
-		//homePage.clickLogoutButton();
-	}
-	
-	@Test
-	public void Login_03_Switch_Page() {
-
-		//Homepage > Myaccount 
-		myAccountPage = homePage.openMyAccountPage(driver);
-		
-		//Myaccount > Sitemap
-		siteMapPage = myAccountPage.openSiteMapPage(driver);
-
-		//Sitemap > Search
-		searchPage = siteMapPage.openSearchPage(driver);
-		
-		//Search > News
-		newsPage = searchPage.openNewsPage(driver);
-		
-		//News > Whitelist
-		wishListPage = newsPage.openWishListPage(driver);
-		
-		//Whitelisrt > Sitemap
-		siteMapPage = wishListPage.openSiteMapPage(driver);
 	}
 	
 	@AfterClass
@@ -99,14 +73,12 @@ public class Level_07_Register_Login_Page_Switch_Page extends BaseTest{
 		driver.close();
 	}
 	
-	
+	public String getEmailRandom() {
+		Random rand = new Random();
+		return "testing" + rand.nextInt(999999) + "@hotmail.net";
+	}
 	HomePageObject homePage;
 	RegisterPageObject registerPage;
 	LoginPageObject loginPage;
-	MyAccountPageObject myAccountPage;
-	SiteMapPageObject siteMapPage;
-	NewsPageObject newsPage;
-	WishListPageObject wishListPage;
-	SearchPageObject searchPage;
 	
 }

@@ -1,4 +1,4 @@
-package com.nopcommerce.login;
+package com.demonopcommerce.login;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -10,9 +10,15 @@ import org.testng.annotations.Test;
 import commons.BaseTest;
 import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.LoginPageObject;
+import pageObjects.nopCommerce.MyAccountPageObject;
+import pageObjects.nopCommerce.NewsPageObject;
+import pageObjects.nopCommerce.PageGeneratorManagement;
 import pageObjects.nopCommerce.RegisterPageObject;
+import pageObjects.nopCommerce.SearchPageObject;
+import pageObjects.nopCommerce.SiteMapPageObject;
+import pageObjects.nopCommerce.WishListPageObject;
 
-public class Level_04_Register_Login_Multi_Browser extends BaseTest{
+public class Level_07_Register_Login_Page_Switch_Page extends BaseTest{
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
@@ -29,10 +35,12 @@ public class Level_04_Register_Login_Multi_Browser extends BaseTest{
 	
 	@Test
 	public void Login_01_Register_To_System() {
-		homePage = new HomePageObject(driver);
+		homePage  = PageGeneratorManagement.getHomePage(driver);
+		System.out.println(homePage.hashCode());
 		Assert.assertTrue(homePage.isSliderDisplayed());
-		homePage.clickToRegisterLink();
-		registerPage  = new RegisterPageObject(driver);
+		
+		registerPage = homePage.clickToRegisterLink();
+
 		Assert.assertTrue(registerPage.isTextRegisterDisplayed());
 		registerPage.clickToGenderMaleRadioButton();
 		registerPage.inputFirstNameTextBox("Automation");
@@ -43,22 +51,47 @@ public class Level_04_Register_Login_Multi_Browser extends BaseTest{
 		registerPage.clickRegisterButton();
 		
 		Assert.assertTrue(registerPage.isSuccesedMessageDisplayed());
-		registerPage.clickToLogoutButton();		
 		
-		homePage = new HomePageObject(driver);
+		homePage = registerPage.clickToLogoutButton();	
+		System.out.println(homePage.hashCode());
+		
 		Assert.assertTrue(homePage.isSliderDisplayed());
 	}
 	
 	@Test
 	public void Login_02_Login_To_System() {
-		homePage.clickToLoginButton();
-		loginPage = new LoginPageObject(driver);
+		loginPage = homePage.clickToLoginButtonToOpen();
+
 		loginPage.inputEmailTextBox(emailAddress);
 		loginPage.inputPasswordTextBox(password);
-		loginPage.clickLoginButton();
 		
-		homePage = new HomePageObject(driver);
+		homePage = loginPage.clickLoginButtonToOpenPage();
+		System.out.println(homePage.hashCode());
+
 		Assert.assertTrue(homePage.isSliderDisplayed());
+		//homePage.clickLogoutButton();
+	}
+	
+	@Test
+	public void Login_03_Switch_Page() {
+
+		//Homepage > Myaccount 
+		myAccountPage = homePage.openMyAccountPage(driver);
+		
+		//Myaccount > Sitemap
+		siteMapPage = myAccountPage.openSiteMapPage(driver);
+
+		//Sitemap > Search
+		searchPage = siteMapPage.openSearchPage(driver);
+		
+		//Search > News
+		newsPage = searchPage.openNewsPage(driver);
+		
+		//News > Whitelist
+		wishListPage = newsPage.openWishListPage(driver);
+		
+		//Whitelisrt > Sitemap
+		siteMapPage = wishListPage.openSiteMapPage(driver);
 	}
 	
 	@AfterClass
@@ -66,8 +99,14 @@ public class Level_04_Register_Login_Multi_Browser extends BaseTest{
 		driver.close();
 	}
 	
+	
 	HomePageObject homePage;
 	RegisterPageObject registerPage;
 	LoginPageObject loginPage;
+	MyAccountPageObject myAccountPage;
+	SiteMapPageObject siteMapPage;
+	NewsPageObject newsPage;
+	WishListPageObject wishListPage;
+	SearchPageObject searchPage;
 	
 }

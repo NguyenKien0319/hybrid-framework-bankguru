@@ -21,7 +21,7 @@ public class HomePageObject extends BasePage {
 		return isElementDisplayed(driver, HomePageUI.SLIDER);
 	}
 
-	public LoginPageObject clickToLoginButton() {
+	public LoginPageObject clickToLoginButtonToOpen() {
 		waitForElementClickable(driver, HomePageUI.LOGIN_LINK);
 		clickToElement(driver, HomePageUI.LOGIN_LINK);
 		return PageGeneratorManagement.getLoginPage(driver);
@@ -29,6 +29,5 @@ public class HomePageObject extends BasePage {
 	public void clickLogoutButton() {
 		waitForElementClickable(driver, HomePageUI.LOGOUT_LINK);
 		clickToElement(driver, HomePageUI.LOGOUT_LINK);
-	}
-	
+	}	
 }

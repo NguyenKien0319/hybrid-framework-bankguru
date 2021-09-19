@@ -11,4 +11,7 @@ public class RegisterPageUI {
 	public static final String REGISTER_BUTTON = "//button [@id='register-button']";
 	public static final String SUCCESS_MESSAGE = "//div[text()='Your registration completed']";
 	public static final String LOGOUT_BUTTON = "//a[@class='ico-logout']";
+	public static final String DYNAMIC_REQUIRED_MESSAGE = "//span[@id ='%s-error' and text() = '%s']";
+	public static final String ERROR_EMAIL_REGISTED_MESSAGE = "//div//li[text()='The specified email already exists']";
+	public static final String INVALID_PASSWORD_MESSAGE = "//span[@id='Password-error']/p[text()='Password must meet the following rules: ']";
 }

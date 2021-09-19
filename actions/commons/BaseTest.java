@@ -25,7 +25,7 @@ public class BaseTest {
 		} else {
 			throw new RuntimeException("Please enter correct browser name");
 		}
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(appUrl);
 		return driver;
@@ -34,5 +34,12 @@ public class BaseTest {
 	protected String getEmailRandom() {
 		Random rand = new Random();
 		return "testing" + rand.nextInt(999999) + "@hotmail.net";
+	}
+	public void sleepInSecond(long timeoutInSecond) {
+		try {
+			Thread.sleep(timeoutInSecond * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
