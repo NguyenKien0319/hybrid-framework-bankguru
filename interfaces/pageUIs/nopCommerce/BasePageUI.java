@@ -6,4 +6,6 @@ public class BasePageUI {
 	public static final String SITE_MAP_LINK = "//div[@class='footer']//a[text()='Sitemap']";
 	public static final String WISH_LIST_LINK = "//div[@class='header-links']//span[text()='Wishlist']";
 	public static final String NEWS_LINK = "//div[@class='footer']//a[text()='News']";
+	
+	public static final String DYNAMIC_FOOTER_LINK = "//div[@class='footer']//a[text()= '%s']";
 }
