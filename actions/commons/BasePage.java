@@ -125,6 +125,10 @@ public class BasePage {
 	public WebElement getElement(WebDriver driver, String locator, String... values) {
 		return driver.findElement(getByXpath(getDynamicLocator(locator, values)));
 	}
+	
+	public String getElementAttribute(WebDriver driver,String locator, String attributeName, String... values) {
+		return getElement(driver,getDynamicLocator(locator, values)).getAttribute(attributeName);
+	}
 
 	public List<WebElement> getElements(WebDriver driver, String locator) {
 		return driver.findElements(getByXpath(locator));
@@ -391,6 +395,11 @@ public class BasePage {
 	protected void waitForElementClickable(WebDriver driver, String locator, String... values) {
 		explicitWait = new WebDriverWait(driver, timeouts);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(getDynamicLocator(locator, values))));
+	}
+	
+	protected void waitForElementClickable(WebDriver driver, String locator) {
+		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
 	}
 
 	public void waitForElementInvisible(WebDriver driver, String locator, String... values) {
