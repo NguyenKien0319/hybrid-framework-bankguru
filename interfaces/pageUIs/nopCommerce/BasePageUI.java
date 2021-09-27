@@ -8,4 +8,6 @@ public class BasePageUI {
 	public static final String NEWS_LINK = "//div[@class='footer']//a[text()='News']";
 	
 	public static final String DYNAMIC_FOOTER_LINK = "//div[@class='footer']//a[text()= '%s']";
+	//Submit button by Name
+	public static final String SUBMIT_BUTTON_BY_NAME = "//button[@class='button-1 %s-button']";
 }

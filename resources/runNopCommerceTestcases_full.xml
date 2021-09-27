@@ -10,8 +10,10 @@
 				name="com.nopcommerce.register.Register_Account"/> -->
 			<!-- <class
 				name="com.nopcommerce.login.Login_Account"/> -->
+			<!-- <class
+				name="com.nopcommerce.myaccount.My_Account"/> -->
 			<class
-				name="com.nopcommerce.myaccount.My_Account"/>
+				name="com.nopcommerce.search.Search_And_Advanced_Search"/>
 		</classes>
 	</test>
 

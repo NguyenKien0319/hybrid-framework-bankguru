@@ -134,6 +134,10 @@ public class BasePage {
 	public List<WebElement> getElements(WebDriver driver, String locator) {
 		return driver.findElements(getByXpath(locator));
 	}
+	
+	public List<WebElement> getElements(WebDriver driver, String locator, String...params) {
+		return driver.findElements(getByXpath(getDynamicLocator(locator, params)));
+	}
 
 	public void clickToElement(WebDriver driver, String locator) {
 		getElement(driver, locator).click();
@@ -405,6 +409,11 @@ public class BasePage {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(locator)));
 	}
+	
+	protected void waitForAllElementsVisible(WebDriver driver, String locator, String... params) {
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(getDynamicLocator(locator, params))));
+	}
 
 	protected void waitForElementClickable(WebDriver driver, String locator, String... values) {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
@@ -470,6 +479,11 @@ public class BasePage {
 	public String getTextDropDownList(WebDriver driver, String locator, String... params) {
 		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
 		return select.getFirstSelectedOption().getText();
+	}
+	//Submit button by Name
+	public void clickSubmitButtonByName(WebDriver driver, String... params) {
+		waitForElementClickable(driver, BasePageUI.SUBMIT_BUTTON_BY_NAME, params);
+		clickToElement(driver, BasePageUI.SUBMIT_BUTTON_BY_NAME, params);
 	}
 
 	private Alert alert;

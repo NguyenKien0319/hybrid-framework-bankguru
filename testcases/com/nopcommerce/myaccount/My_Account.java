@@ -2,6 +2,7 @@ package com.nopcommerce.myaccount;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -27,7 +28,6 @@ public class My_Account extends BaseTest{
 		newPassword = "456789";
 		homePage = PageGeneratorManagement.getHomePage(driver);
 		loginPage = homePage.clickToLoginButtonToOpen();
-		//loginPage.clickLoginHeaderLink();
 		loginPage.inputEmailTextBox(GlobalConstants.EMAIL_ID);
 		loginPage.inputPasswordTextBox(oldPassword);
 		homePage = loginPage.clickLoginButtonToOpenPage();
@@ -102,5 +102,10 @@ public class My_Account extends BaseTest{
 		myAccountPage = homePage.openMyAccountPage(driver);
 		myAccountPage.goToLinkName("My product reviews");
 		Assert.assertTrue(myAccountPage.isReviewProductByNameDisplayed("Review Title","80%","This is content","Build your own computer"));
+	}
+	
+	@AfterClass
+	public void AfterClass() {
+		driver.quit();
 	}
 }
