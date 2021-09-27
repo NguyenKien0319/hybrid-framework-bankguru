@@ -54,12 +54,13 @@ public class BasePage {
 	}
 
 	public Alert waitElementPresence(WebDriver driver) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		return explicitWait.until(ExpectedConditions.alertIsPresent());
 	}
 
 	public void aceptAlert(WebDriver driver) {
 		waitElementPresence(driver);
+		alert = driver.switchTo().alert();
 		alert.accept();
 	}
 
@@ -165,6 +166,11 @@ public class BasePage {
 		select = new Select(getElement(driver, locator));
 		select.selectByVisibleText(item);
 	}
+	
+	public void selectDropDownByText(WebDriver driver, String locator, String item, String... params) {
+		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
+		select.selectByVisibleText(item);
+	}
 
 	public String getDropDownItem(WebDriver driver, String locator) {
 		select = new Select(getElement(driver, locator));
@@ -179,9 +185,9 @@ public class BasePage {
 	public void selectItemInCustomDropdown(WebDriver driver, String parentLocator, String childItemLocator,
 			String expectedItem) {
 		getElement(driver, parentLocator).click();
-		sleepInSecond(1);
+		sleepInMiliSecond(1);
 
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		List<WebElement> allItems = explicitWait
 				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXpath(childItemLocator)));
 
@@ -189,10 +195,10 @@ public class BasePage {
 			if (item.getText().trim().equals(expectedItem)) {
 				jsExecutor = (JavascriptExecutor) driver;
 				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
-				sleepInSecond(1);
+				sleepInMiliSecond(1);
 
 				item.click();
-				sleepInSecond(1);
+				sleepInMiliSecond(1);
 				break;
 			}
 		}
@@ -201,9 +207,17 @@ public class BasePage {
 	public String getAttributeValue(WebDriver driver, String locator, String attributeName) {
 		return getElement(driver, locator).getAttribute(attributeName);
 	}
+	
+	public String getAttributeValue(WebDriver driver, String locator, String attributeName, String... params) {
+		return getElement(driver, getDynamicLocator(locator, params)).getAttribute(attributeName);
+	}
 
 	public String getTextElement(WebDriver driver, String locator) {
 		return getElement(driver, locator).getText();
+	}
+	
+	public String getTextElement(WebDriver driver, String locator, String...params) {
+		return getElement(driver, getDynamicLocator(locator, params)).getText();
 	}
 
 	public String getCssValue(WebDriver driver, String locator, String cssAttributeName) {
@@ -317,7 +331,7 @@ public class BasePage {
 		String originalStyle = element.getAttribute("style");
 		jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
 				"border: 2px solid red; border-style: dashed;");
-		sleepInSecond(1);
+		sleepInMiliSecond(1);
 		jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
 				originalStyle);
 	}
@@ -344,7 +358,7 @@ public class BasePage {
 	}
 
 	public boolean areJQueryAndJsLoadedSuccess(WebDriver driver) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		jsExecutor = (JavascriptExecutor) driver;
 		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
 			@Override
@@ -377,40 +391,40 @@ public class BasePage {
 	}
 
 	protected void waitForElementVisible(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
 	}
 
 	protected void waitForElementVisible(WebDriver driver, String locator, String... values) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait
 				.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(getDynamicLocator(locator, values))));
 	}
 
 	protected void waitForAllElementsVisible(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getByXpath(locator)));
 	}
 
 	protected void waitForElementClickable(WebDriver driver, String locator, String... values) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(getDynamicLocator(locator, values))));
 	}
 	
 	protected void waitForElementClickable(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
 	}
 
 	public void waitForElementInvisible(WebDriver driver, String locator, String... values) {
-		explicitWait = new WebDriverWait(driver, timeouts);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait
 				.until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(getDynamicLocator(locator, values))));
 	}
 
-	public void sleepInSecond(long timeoutInSecond) {
+	public void sleepInMiliSecond(long timeoutInSecond) {
 		try {
-			Thread.sleep(timeoutInSecond * 1000);
+			Thread.sleep(timeoutInSecond);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -452,10 +466,15 @@ public class BasePage {
 		clickToElement(driver, BasePageUI.DYNAMIC_FOOTER_LINK, pageName);
 	}
 
+	//My Account Page- getText dropdownlist
+	public String getTextDropDownList(WebDriver driver, String locator, String... params) {
+		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
+		return select.getFirstSelectedOption().getText();
+	}
+
 	private Alert alert;
 	private Select select;
 	private Actions action;
-	private long timeouts = 30;
 	private WebDriverWait explicitWait;
 	private JavascriptExecutor jsExecutor;
 }

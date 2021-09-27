@@ -29,5 +29,34 @@ public class HomePageObject extends BasePage {
 	public void clickLogoutButton() {
 		waitForElementClickable(driver, HomePageUI.LOGOUT_LINK);
 		clickToElement(driver, HomePageUI.LOGOUT_LINK);
+	}
+	//Review Product
+	public void clickToProductByName(String productName) {
+		waitForElementClickable(driver, HomePageUI.FEATURES_PRODUCT_BY_NAME, productName);
+		clickToElement(driver, HomePageUI.FEATURES_PRODUCT_BY_NAME, productName);	
+	}
+	public void clickToAddReviewTextLink() {
+		waitForElementClickable(driver, HomePageUI.REVIEW_TEXTLINK);
+		clickToElement(driver, HomePageUI.REVIEW_TEXTLINK);
+	}
+	public void inputReviewTitle(String title) {
+		waitForElementClickable(driver, HomePageUI.REVIEW_TITLE_TEXTBOX);
+		sendkeysToElement(driver, HomePageUI.REVIEW_TITLE_TEXTBOX,title);
+	}
+	public void inputReviewContent(String content) {
+		waitForElementClickable(driver, HomePageUI.REVIEW_TEXT_TEXTAREA);
+		sendkeysToElement(driver, HomePageUI.REVIEW_TEXT_TEXTAREA, content);
+	}
+	public void clickRatingRadioButton(String rating) {
+		waitForElementClickable(driver, HomePageUI.REVIEW_RATING_RADIO_BUTTON, rating);
+		clickToElement(driver, HomePageUI.REVIEW_RATING_RADIO_BUTTON, rating);
+	}
+	public void clickSubmitReviewButton() {
+		waitForElementClickable(driver, HomePageUI.REVIEW_SUBMIT_BUTTON);
+		clickToElement(driver, HomePageUI.REVIEW_SUBMIT_BUTTON);
+	}
+	public boolean isAddReviewMessageSuccessDisplayed() {
+		waitForElementVisible(driver, HomePageUI.REVIEW_ADD_SUCCESS_TEXT);
+		return isElementDisplayed(driver, HomePageUI.REVIEW_ADD_SUCCESS_TEXT);
 	}	
 }
