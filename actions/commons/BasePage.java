@@ -237,6 +237,12 @@ public class BasePage {
 			getElement(driver, locator).click();
 		}
 	}
+	
+	public void checkTheCheckBoxOrRadio(WebDriver driver, String locator, String... params) {
+		if (!isElementSelected(driver, getDynamicLocator(locator, params))) {
+			getElement(driver, getDynamicLocator(locator, params)).click();
+		}
+	}
 
 	public void unCheckTheCheckBox(WebDriver driver, String locator) {
 		if (isElementSelected(driver, locator)) {

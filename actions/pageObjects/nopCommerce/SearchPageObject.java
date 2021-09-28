@@ -37,5 +37,21 @@ public class SearchPageObject extends BasePage{
 		}
 		return true;
 	}
+	public String getProductNameSearchByName(String searchText) {
+		waitForElementVisible(driver, SearchPageUI.SEARCH_RESULT_BY_NAME, searchText);
+		return getTextElement(driver, SearchPageUI.SEARCH_RESULT_BY_NAME, searchText);
+	}
+	public void clickToCheckBoxByName(String checkBoxName) {
+		waitForElementClickable(driver, SearchPageUI.SEARCH_CHECKBOX_BYNAME, checkBoxName);
+		checkTheCheckBoxOrRadio(driver, SearchPageUI.SEARCH_CHECKBOX_BYNAME, checkBoxName);	
+	}
+	public void selectCategoriesDropDownList(String item) {
+		waitForElementClickable(driver, SearchPageUI.SEARCH_CATEGORIES_DROPDOWN_LIST, item);
+		selectDropDownByText(driver, SearchPageUI.SEARCH_CATEGORIES_DROPDOWN_LIST, item);
+	}
+	public void selectManufacturerDropDownList(String item) {
+		waitForElementClickable(driver, SearchPageUI.SEARCH_MANUFACTURER_DROPDOWN_LIST, item);
+		selectDropDownByText(driver, SearchPageUI.SEARCH_MANUFACTURER_DROPDOWN_LIST, item);
+	}
 
 }
