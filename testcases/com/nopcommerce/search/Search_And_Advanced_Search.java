@@ -73,7 +73,8 @@ public class Search_And_Advanced_Search extends BaseTest{
 	}
 	@Test
 	public void Search_06_Advanced_Search_With_Sub_Categories() {
-		searchPage.openFooterPage(driver, "Search");
+		searchPage.getRefreshPage(driver);
+		//searchPage.openFooterPage(driver, "Search");
 		searchPage.inputToSearchTextBox("Apple MacBook Pro");
 		searchPage.clickToCheckBoxByName("Advanced search");
 		searchPage.selectCategoriesDropDownList("Computers");
@@ -84,7 +85,7 @@ public class Search_And_Advanced_Search extends BaseTest{
 	}
 	@Test
 	public void Search_07_Advanced_Search_With_Incorrect_Manufacturer() {
-		searchPage.openFooterPage(driver, "Search");
+		searchPage.getRefreshPage(driver);
 		searchPage.inputToSearchTextBox("Apple MacBook Pro");
 		searchPage.clickToCheckBoxByName("Advanced search");
 		searchPage.selectCategoriesDropDownList("Computers");
@@ -95,7 +96,7 @@ public class Search_And_Advanced_Search extends BaseTest{
 	}
 	@Test
 	public void Search_08_Advanced_Search_With_Correct_Manufacturer() {
-		searchPage.openFooterPage(driver, "Search");
+		searchPage.getRefreshPage(driver);
 		searchPage.inputToSearchTextBox("Apple MacBook Pro");
 		searchPage.clickToCheckBoxByName("Advanced search");
 		searchPage.selectCategoriesDropDownList("Computers");
@@ -104,6 +105,7 @@ public class Search_And_Advanced_Search extends BaseTest{
 		searchPage.clickSubmitButtonByName(driver, "search");
 		Assert.assertEquals(searchPage.getNumberOfProduct("Apple MacBook Pro"),1);
 		Assert.assertEquals(searchPage.getProductNameSearchByName("Apple MacBook Pro"),"Apple MacBook Pro 13-inch");
+		sleepInSecond(5);
 	}
 	@AfterClass
 	public void AfterClass() {

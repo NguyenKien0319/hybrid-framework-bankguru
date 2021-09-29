@@ -265,6 +265,9 @@ public class BasePage {
 	public Boolean isElementSelected(WebDriver driver, String locator) {
 		return getElement(driver, locator).isSelected();
 	}
+	public Boolean isElementSelected(WebDriver driver, String locator, String... params) {
+		return getElement(driver, getDynamicLocator(locator, params)).isSelected();
+	}
 
 	public WebDriver switchToFrameByElement(WebDriver driver, String locator) {
 		return driver.switchTo().frame(getElement(driver, locator));
