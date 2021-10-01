@@ -21,8 +21,6 @@ public class ProductPO extends BasePage{
 	}
 
 	public void searchProductByName(String productName) {
-		//waitForElementClickable(driver, ProductUI.SEARCH_FIELD);
-		//clickToElement(driver, ProductUI.SEARCH_FIELD);
 		waitForElementVisible(driver, ProductUI.PRODUCT_NAME_TEXTBOX);
 		sendkeysToElement(driver, ProductUI.PRODUCT_NAME_TEXTBOX, productName);
 		waitForElementClickable(driver, ProductUI.SEARCH_BUTTON);
@@ -37,6 +35,16 @@ public class ProductPO extends BasePage{
 	public void clickToEditProduct(String productName) {
 		waitForElementClickable(driver, ProductUI.EDIT_BUTTON_GET_BY_PRODUCT_NAME, productName);
 		clickToElement(driver, ProductUI.EDIT_BUTTON_GET_BY_PRODUCT_NAME, productName);
+	}
+
+	public boolean isSuccessMessageDisplayed() {
+		waitForElementVisible(driver, ProductUI.MESSAGE_UPDATED_SUCCESS);
+		return isElementDisplayed(driver, ProductUI.MESSAGE_UPDATED_SUCCESS);
+	}
+
+	public boolean isNoImageDisplayByProductName(String productName) {
+		waitForAllElementsVisible(driver, ProductUI.DEFAULT_IMAGE_IN_PRODUCT_LIST_SEARCH_BY_NAME, productName);
+		return isElementDisplayed(driver, ProductUI.DEFAULT_IMAGE_IN_PRODUCT_LIST_SEARCH_BY_NAME, productName);
 	}
 	
 }

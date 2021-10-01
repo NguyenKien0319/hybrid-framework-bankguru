@@ -2,6 +2,7 @@ package com.nopcommerce.admin;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,7 +15,7 @@ import pageObjects.admin.nopCommerce.PageGeneratorManager;
 import pageObjects.admin.nopCommerce.ProductPO;
 
 public class Level_10_Upload_File extends BaseTest {
-	WebDriver driver;
+	private WebDriver driver;
 	LoginPageObject loginPage;
 	DashBoardPO dashboardPage;
 	ProductPO productPage;
@@ -33,6 +34,7 @@ public class Level_10_Upload_File extends BaseTest {
 	public void Upload_File() {
 		loginPage = PageGeneratorManager.getLoginPage(driver);
 		dashboardPage = loginPage.loginToPage("admin@yourstore.com", "admin");
+
 		dashboardPage.goToPageByMenuBar("Catalog", "Products");
 		productPage = PageGeneratorManager.getProductPage(driver);
 		productPage.searchProductByName(ProductName);
@@ -44,6 +46,26 @@ public class Level_10_Upload_File extends BaseTest {
 		Assert.assertTrue(editProductPage.isImageUploadDisplayed(imageName));
 		editProductPage.inputAllAttributesTextBox("abc", "NameTitle", "1");
 		Assert.assertTrue(editProductPage.isNewInfoImageDisplayed(ProductName, "1", "abc", "NameTitle"));
-		editProductPage.clickToSaveButton();
+		
+		productPage = editProductPage.clickToSaveButton();
+		Assert.assertTrue(productPage.isSuccessMessageDisplayed());
+		
+		productPage.searchProductByName(ProductName);
+		Assert.assertTrue(productPage.isSearchProductByNameDisplayed(ProductName, "AD_CS4_PH", "75"));
+		productPage.clickToEditProduct(ProductName);
+		editProductPage = PageGeneratorManager.getEditProductPage(driver);
+		editProductPage.openSubTabByCardTitle("Pictures");
+		editProductPage.deleteProductByName(ProductName);
+		Assert.assertTrue(editProductPage.isNoDataInTableDisplayedByCardTitle("Pictures"));
+		
+		productPage = editProductPage.clickToSaveButton();
+		Assert.assertTrue(productPage.isSuccessMessageDisplayed());
+		productPage.searchProductByName(ProductName);
+		Assert.assertTrue(productPage.isNoImageDisplayByProductName(ProductName));
+	}
+	
+	@AfterClass()
+	public void AfterClass() {
+		driver.quit();
 	}
 }

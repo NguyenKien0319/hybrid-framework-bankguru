@@ -12,7 +12,7 @@ import pageObjects.jQuery.HomePO;
 import pageObjects.jQuery.PageGeneratorManager;
 
 public class Level_09_Data_Table extends BaseTest {
-	WebDriver driver;
+	private WebDriver driver;
 	HomePO homePage;
 
 	@Parameters({ "browser", "url" })
@@ -51,7 +51,7 @@ public class Level_09_Data_Table extends BaseTest {
 		Assert.assertTrue(homePage.isInfoDisplayCorrectly("276880", "Angola", "276472", "553353"));
 		Assert.assertTrue(homePage.isInfoDisplayCorrectly("338282", "Argentina", "349238", "687522"));
 	}
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void AfterClass() {
 		driver.quit();
 	}

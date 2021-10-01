@@ -15,7 +15,7 @@ import pageObjects.nopCommerce.PageGeneratorManagement;
 import pageObjects.nopCommerce.SearchPageObject;
 
 public class Search_And_Advanced_Search extends BaseTest{
-	WebDriver driver;
+	private WebDriver driver;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	SearchPageObject searchPage;

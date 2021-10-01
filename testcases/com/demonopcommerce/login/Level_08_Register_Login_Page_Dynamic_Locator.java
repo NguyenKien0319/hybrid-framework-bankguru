@@ -19,7 +19,7 @@ import pageObjects.nopCommerce.SiteMapPageObject;
 import pageObjects.nopCommerce.WishListPageObject;
 
 public class Level_08_Register_Login_Page_Dynamic_Locator extends BaseTest {
-	WebDriver driver;
+	private WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String emailAddress, password;
 

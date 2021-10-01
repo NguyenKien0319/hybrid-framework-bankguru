@@ -99,9 +99,22 @@ public class EditProductPO extends BasePage {
 				title);
 	}
 
-	public void clickToSaveButton() {
+	public ProductPO clickToSaveButton() {
 		waitForElementClickable(driver, EditProductUI.SAVE_BUTTON);
 		clickToElement(driver, EditProductUI.SAVE_BUTTON);
+		return PageGeneratorManager.getProductPage(driver);
+	}
+
+	public void deleteProductByName(String productName) {
+		productName = productName.replace(" ", "-").toLowerCase();
+		waitForElementClickable(driver, EditProductUI.DELETE_IMAGE_BUTTON, productName);
+		clickToElement(driver, EditProductUI.DELETE_IMAGE_BUTTON, productName);
+		aceptAlert(driver);
+	}
+
+	public boolean isNoDataInTableDisplayedByCardTitle(String cardTitle) {
+		waitForAllElementsVisible(driver, EditProductUI.NO_DATA_IN_TABLE_BY_CARDTITLE, cardTitle);
+		return isElementDisplayed(driver, EditProductUI.NO_DATA_IN_TABLE_BY_CARDTITLE, cardTitle);
 	}
 
 }

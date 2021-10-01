@@ -15,7 +15,7 @@ import pageObjects.nopCommerce.MyAccountPageObject;
 import pageObjects.nopCommerce.PageGeneratorManagement;
 
 public class My_Account extends BaseTest{
-	WebDriver driver;
+	private WebDriver driver;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	MyAccountPageObject myAccountPage;

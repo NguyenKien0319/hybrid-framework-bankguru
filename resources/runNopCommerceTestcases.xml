@@ -3,13 +3,13 @@
 
 	<parameter name="url" value="https://admin-demo.nopcommerce.com/login" />
 
-	<!-- <test name="RUN ON FIREFOX">
+	<test name="RUN ON FIREFOX">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<class
-				name="com.nopcommerce.admin.Level_10_Upload_File"/>
+			<!-- <class
+				name="com.nopcommerce.admin.Level_10_Upload_File"/> -->
 		</classes>
-	</test> -->
+	</test>
 
 	<test name="RUN ON EDGE">
 		<parameter name="browser" value="edge" />
