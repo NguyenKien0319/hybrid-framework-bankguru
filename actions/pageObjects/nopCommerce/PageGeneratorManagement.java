@@ -11,6 +11,7 @@ public class PageGeneratorManagement {
 	private static NewsPageObject newsPage;
 	private static WishListPageObject wishListPage;
 	private static SearchPageObject searchPage;
+	private static ShoppingCartPageObject shoppingCartPage;
 	
 	private PageGeneratorManagement() {
 		}
@@ -68,5 +69,10 @@ public class PageGeneratorManagement {
 			newsPage = new NewsPageObject(driver);
 		//}
 		return newsPage;
+	}
+	
+	public static ShoppingCartPageObject getShoppingCartPage(WebDriver driver) {
+		shoppingCartPage = new ShoppingCartPageObject(driver);
+		return shoppingCartPage;
 	}
 }

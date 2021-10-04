@@ -53,5 +53,9 @@ public class SearchPageObject extends BasePage{
 		waitForElementClickable(driver, SearchPageUI.SEARCH_MANUFACTURER_DROPDOWN_LIST, item);
 		selectDropDownByText(driver, SearchPageUI.SEARCH_MANUFACTURER_DROPDOWN_LIST, item);
 	}
+	public void clickProductNameTextLink(String productName) {
+		waitForElementClickable(driver, SearchPageUI.PRODUCTNAME_TEXT_LINK, productName);
+		clickToElement(driver, SearchPageUI.PRODUCTNAME_TEXT_LINK, productName);
+	}
 
 }

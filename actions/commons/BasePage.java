@@ -1,7 +1,11 @@
 package commons;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -16,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.nopCommerce.HomePageObject;
 import pageObjects.nopCommerce.MyAccountPageObject;
 import pageObjects.nopCommerce.NewsPageObject;
 import pageObjects.nopCommerce.PageGeneratorManagement;
@@ -189,7 +194,7 @@ public class BasePage {
 	public void selectItemInCustomDropdown(WebDriver driver, String parentLocator, String childItemLocator,
 			String expectedItem) {
 		getElement(driver, parentLocator).click();
-		sleepInMiliSecond(1);
+		sleepInMiliSecond(1000);
 
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		List<WebElement> allItems = explicitWait
@@ -199,10 +204,10 @@ public class BasePage {
 			if (item.getText().trim().equals(expectedItem)) {
 				jsExecutor = (JavascriptExecutor) driver;
 				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
-				sleepInMiliSecond(1);
+				sleepInMiliSecond(1000);
 
 				item.click();
-				sleepInMiliSecond(1);
+				sleepInMiliSecond(1000);
 				break;
 			}
 		}
@@ -257,6 +262,25 @@ public class BasePage {
 	public Boolean isElementDisplayed(WebDriver driver, String locator, String... values) {
 		return getElement(driver, getDynamicLocator(locator, values)).isDisplayed();
 	}
+	
+	public boolean isElementUnDisplayed(WebDriver driver, String locator) {
+		overrideGlobalTimeout(driver,GlobalConstants.SHORT_TIMEOUT);
+		List<WebElement> elements = getElements(driver, locator);
+		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
+		if(elements.size() == 0) {
+			return true;
+		}
+		else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public void overrideGlobalTimeout(WebDriver driver, long timeOut) {
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+	}
 
 	public Boolean isElementEnabled(WebDriver driver, String locator) {
 		return getElement(driver, locator).isEnabled();
@@ -285,6 +309,11 @@ public class BasePage {
 	public void hoverMouseToElement(WebDriver driver, String locator) {
 		action = new Actions(driver);
 		action.moveToElement(getElement(driver, locator)).perform();
+	}
+	
+	public void hoverMouseToElement(WebDriver driver, String locator, String... params) {
+		action = new Actions(driver);
+		action.moveToElement(getElement(driver, getDynamicLocator(locator, params))).perform();
 	}
 
 	public void rightClickToElement(WebDriver driver, String locator) {
@@ -407,6 +436,11 @@ public class BasePage {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
 	}
+	
+	protected void waitForElementPresence(WebDriver driver, String locator) {
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		explicitWait.until(ExpectedConditions.presenceOfElementLocated(getByXpath(locator)));
+	}
 
 	protected void waitForElementVisible(WebDriver driver, String locator, String... values) {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
@@ -479,12 +513,16 @@ public class BasePage {
 	}
 
 	// 1 ham by DynamicLocator in footer
-	public void openFooterPage(WebDriver driver, String... pageName) {
+	public void openFooterPage(WebDriver driver, String pageName) {
 		waitForElementVisible(driver, BasePageUI.DYNAMIC_FOOTER_LINK, pageName);
 		clickToElement(driver, BasePageUI.DYNAMIC_FOOTER_LINK, pageName);
 	}
 
-	//My Account Page- getText dropdownlist
+	public String getTextDropDownList(WebDriver driver, String locator) {
+		select = new Select(getElement(driver, locator));
+		return select.getFirstSelectedOption().getText();
+	}
+	
 	public String getTextDropDownList(WebDriver driver, String locator, String... params) {
 		select = new Select(getElement(driver, getDynamicLocator(locator, params)));
 		return select.getFirstSelectedOption().getText();
@@ -494,7 +532,98 @@ public class BasePage {
 		waitForElementClickable(driver, BasePageUI.SUBMIT_BUTTON_BY_NAME, params);
 		clickToElement(driver, BasePageUI.SUBMIT_BUTTON_BY_NAME, params);
 	}
-
+	
+	//Search product by name
+	public SearchPageObject searchProductByName(WebDriver driver, String productName) {
+		waitForElementVisible(driver, BasePageUI.SEARCH_TEXTBOX);
+		sendkeysToElement(driver, BasePageUI.SEARCH_TEXTBOX, productName);
+		waitForElementClickable(driver, BasePageUI.SEACH_BOX_BUTTON);
+		clickToElement(driver, BasePageUI.SEACH_BOX_BUTTON);
+		return PageGeneratorManagement.getSearchPage(driver);
+	}
+	
+	//Open header-menu not mobile
+	public void openHeaderMenuNotMobile(WebDriver driver, String headerName, String headerSubName) {
+		waitForElementVisible(driver, BasePageUI.HEADER_MENU_BY_NAME, headerName);
+		hoverMouseToElement(driver, BasePageUI.HEADER_MENU_BY_NAME, headerName);
+		waitForElementClickable(driver, BasePageUI.HEADER_SUB_MENU_BY_NAME, headerName, headerSubName);
+		clickToElement(driver, BasePageUI.HEADER_SUB_MENU_BY_NAME, headerName, headerSubName);
+	}
+	//Sort
+	public boolean isDataStringSortedByAscending(WebDriver driver, String locator) {
+		List<WebElement> elements = getElements(driver, locator);
+		List<String> names = elements.stream().map(name->name.getText()).collect(Collectors.toList());
+		List<String> sortNames = new ArrayList<String>(names);
+		Collections.sort(sortNames);
+		return sortNames.equals(names);
+	}
+	
+	public boolean isDataStringSortedByDescending(WebDriver driver, String locator) {
+		List<WebElement> elements = getElements(driver, locator);
+		List<String> names = elements.stream().map(name-> name.getText()).collect(Collectors.toList());
+		List<String> sortNames = new ArrayList<String>(names);
+		Collections.sort(sortNames);
+		Collections.reverse(sortNames);
+		return sortNames.equals(names);
+	}
+	
+	public boolean isDataFloatSortedByAscending(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elements = getElements(driver, locator);
+		for (WebElement element : elements) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
+		}
+		ArrayList<Float> sortList = new ArrayList<Float>(arrayList);
+		Collections.sort(sortList);
+		return sortList.equals(arrayList);
+	}
+	
+	public boolean isDataFloatSortedByDescending(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elements = getElements(driver, locator);
+		for (WebElement element : elements) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
+		}
+		ArrayList<Float> sortList = new ArrayList<Float>(arrayList);
+		Collections.sort(sortList);
+		Collections.reverse(sortList);
+		return sortList.equals(arrayList);
+	}
+	//ReviewProduct
+	public void getProductByAction(WebDriver driver, String buttonAction) {
+		waitForElementClickable(driver, BasePageUI.BUTTON_BY_ACTION, buttonAction);
+		clickToElement(driver, BasePageUI.BUTTON_BY_ACTION, buttonAction);
+	}
+	public boolean isAddToWishListMessageSuccessDisplayed(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.ADD_TO_WISHLIST_SUCCESS_TEXT);
+		return isElementDisplayed(driver, BasePageUI.ADD_TO_WISHLIST_SUCCESS_TEXT);
+	}
+	//Open wishlistPage
+	public WishListPageObject clickToOpenWishList(WebDriver driver) {
+		waitForElementClickable(driver, BasePageUI.WISHLIST_LINK_IN_SUCCESS_TEXT);
+		clickToElement(driver, BasePageUI.WISHLIST_LINK_IN_SUCCESS_TEXT);
+		return PageGeneratorManagement.getWishListPage(driver);
+	}
+	
+	public void clickAddToCartCheckBoxByProductName(WebDriver driver, String productName) {
+		waitForElementClickable(driver, BasePageUI.ADD_TO_CART_CHECKBOX_BY_PRODUCTNAME, productName);
+		checkTheCheckBoxOrRadio(driver, BasePageUI.ADD_TO_CART_CHECKBOX_BY_PRODUCTNAME, productName);
+	}
+	public void clickWishListAcTionButton(WebDriver driver, String actionButton) {
+		waitForElementClickable(driver, BasePageUI.WISHLIST_ACTION_BUTTON, actionButton);
+		clickToElement(driver, BasePageUI.WISHLIST_ACTION_BUTTON, actionButton);
+	}
+	public String getInforProductValue(WebDriver driver, String inforProductValue) {
+		waitForElementVisible(driver, BasePageUI.INFOR_PRODUCT_VALUE, inforProductValue);
+		return getTextElement(driver, BasePageUI.INFOR_PRODUCT_VALUE, inforProductValue);
+	}
+	//Goback HomePage
+	public HomePageObject clickToHeaderLogo(WebDriver driver) {
+		waitForElementVisible(driver, BasePageUI.LOGO_LINK);
+		clickToElement(driver, BasePageUI.LOGO_LINK);
+		return PageGeneratorManagement.getHomePage(driver);
+	}
+	
 	private Alert alert;
 	private Select select;
 	private Actions action;

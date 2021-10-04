@@ -6,14 +6,18 @@
 	<test name="RUN ON FIREFOX">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<!-- <class
+		<!-- 	<class
 				name="com.nopcommerce.register.Register_Account"/> -->
 			<!-- <class
 				name="com.nopcommerce.login.Login_Account"/> -->
 			<!-- <class
 				name="com.nopcommerce.myaccount.My_Account"/> -->
+			<!-- <class
+				name="com.nopcommerce.search.Search_And_Advanced_Search"/> -->
+			<!-- <class
+				name="com.nopcommerce.sort.Sort_Display_Paging"/> -->
 			<class
-				name="com.nopcommerce.search.Search_And_Advanced_Search"/>
+				name="com.nomcommerce.wishlist.WishList_Compare_RecentView"/>
 		</classes>
 	</test>
 

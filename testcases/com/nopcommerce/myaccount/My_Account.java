@@ -39,8 +39,8 @@ public class My_Account extends BaseTest{
 	public void MyAccount_01_Update_Customer_Info() {
 		myAccountPage = homePage.openMyAccountPage(driver);
 		myAccountPage.selectFemaleRadioButton();
-		myAccountPage.updateTexBoxByName("FirstName","testing");
-		myAccountPage.updateTexBoxByName("LastName","forum");
+		myAccountPage.updateTexBoxByName("FirstName",GlobalConstants.FIRST_NAME);
+		myAccountPage.updateTexBoxByName("LastName",GlobalConstants.LAST_NAME);
 		myAccountPage.updateTexBoxByName("Company","Apple");
 		myAccountPage.updateBirthdate("Day","19");
 		myAccountPage.updateBirthdate("Month","March");
@@ -48,8 +48,8 @@ public class My_Account extends BaseTest{
 		myAccountPage.clickToSaveButton();
 		
 		Assert.assertTrue(myAccountPage.isFemaleRadioButtonSelected());
-		Assert.assertEquals(myAccountPage.isTextBoxByNameUpdated("FirstName"),"testing");
-		Assert.assertEquals(myAccountPage.isTextBoxByNameUpdated("LastName"),"forum");
+		Assert.assertEquals(myAccountPage.isTextBoxByNameUpdated("FirstName"),GlobalConstants.FIRST_NAME);
+		Assert.assertEquals(myAccountPage.isTextBoxByNameUpdated("LastName"),GlobalConstants.LAST_NAME);
 		Assert.assertEquals(myAccountPage.isTextBoxByNameUpdated("Company"),"Apple");
 		Assert.assertEquals(myAccountPage.isBirthdateUpdated("Day"),"19");
 		Assert.assertEquals(myAccountPage.isBirthdateUpdated("Month"),"March");

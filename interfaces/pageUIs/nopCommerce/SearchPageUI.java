@@ -8,5 +8,6 @@ public class SearchPageUI {
 	public static final String SEARCH_CHECKBOX_BYNAME = "//label[text()='%s']/preceding-sibling::input";
 	public static final String SEARCH_CATEGORIES_DROPDOWN_LIST = "//select[@id='cid']";
 	public static final String SEARCH_MANUFACTURER_DROPDOWN_LIST = "//select[@id='mid']";
+	public static final String PRODUCTNAME_TEXT_LINK = "//h2[@class='product-title']/a[text()='%s']";
 	
 }
