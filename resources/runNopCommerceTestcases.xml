@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd' >
 <suite name="NopCommerce" parallel="false">
 
-	<parameter name="url" value="https://admin-demo.nopcommerce.com/login" />
+	<listeners>
+		<listener class-name = "commons.MethodListener"/>
+	</listeners>
+
+	<parameter name="url" value="https://demo.nopcommerce.com/" />
 
 	<test name="RUN ON FIREFOX">
 		<parameter name="browser" value="firefox" />
 		<classes>
 			<!-- <class
 				name="com.nopcommerce.admin.Level_10_Upload_File"/> -->
+			<class
+				name="com.demonopcommerce.login.Level_12_Register_Assert_Verify"/>
 		</classes>
 	</test>
 
-	<test name="RUN ON EDGE">
+	<!-- <test name="RUN ON EDGE">
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
 				name="com.nopcommerce.admin.Level_10_Upload_File" />
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- <test name="RUN ON CHROME">
 		<parameter name="browser" value="chrome" />

@@ -6,7 +6,7 @@
 	<test name="RUN ON FIREFOX">
 		<parameter name="browser" value="firefox" />
 		<classes>
-		<!-- 	<class
+			<!-- <class
 				name="com.nopcommerce.register.Register_Account"/> -->
 			<!-- <class
 				name="com.nopcommerce.login.Login_Account"/> -->
@@ -16,13 +16,13 @@
 				name="com.nopcommerce.search.Search_And_Advanced_Search"/> -->
 			<!-- <class
 				name="com.nopcommerce.sort.Sort_Display_Paging"/> -->
-			<class
-				name="com.nomcommerce.wishlist.WishList_Compare_RecentView"/>
+		<!-- 	<class
+				name="com.nomcommerce.wishlist.WishList_Compare_RecentView"/> -->
 		</classes>
 	</test>
 
 	<test name="RUN ON EDGE">
-		<parameter name="browser" value="edge" />
+		<parameter name="browser" value="edge_chromium" />
 		<classes>
 			<!-- <class
 				name="com.nopcommerce.register.Register_Account" /> -->
@@ -30,6 +30,10 @@
 				name="com.nopcommerce.login.Login_Account"/> -->
 			<!-- <class
 				name="com.nopcommerce.myaccount.My_Account"/>	 -->
+			<!-- <class
+				name="com.nopcommerce.search.Search_And_Advanced_Search"/> -->
+			<class
+				name="com.nopcommerce.sort.Sort_Display_Paging"/>	
 		</classes>
 	</test>
 
