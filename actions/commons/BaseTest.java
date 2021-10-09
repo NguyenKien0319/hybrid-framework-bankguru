@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -11,13 +12,14 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 	private WebDriver driver;
 	protected final Log log;
-	
+
 	protected BaseTest() {
 		log = LogFactory.getLog(getClass());
 	}
@@ -46,6 +48,24 @@ public class BaseTest {
 		return driver;
 	}
 	
+	public WebDriver getDriver() {
+		return this.driver;
+	}
+	
+	protected String getEmailRandom() {
+		Random rand = new Random();
+		return "testing" + rand.nextInt(999999) + "@hotmail.net";
+	}
+	
+	protected void sleepInSecond(long timeoutInSecond) {
+		try {
+			Thread.sleep(timeoutInSecond * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 	private boolean checkTrue(boolean condition) {
 		boolean pass = true;
 		try {
@@ -108,16 +128,27 @@ public class BaseTest {
 		return checkEquals(actual, expected);
 	}
 
-	protected String getEmailRandom() {
-		Random rand = new Random();
-		return "testing" + rand.nextInt(999999) + "@hotmail.net";
+	@BeforeTest
+	public void deleteAllFilesInReportNGScreenshot() {
+		log.info("---------- START delete file in folder ----------");
+		deleteAllFileInFolder();
+		log.info("---------- END delete file in folder ----------");
 	}
 
-	protected void sleepInSecond(long timeoutInSecond) {
+	public void deleteAllFileInFolder() {
 		try {
-			Thread.sleep(timeoutInSecond * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			String workingDir = System.getProperty("user.dir");
+			String pathFolderDownload = workingDir + "\\ReportNGScreenshots";
+			File file = new File(pathFolderDownload);
+			File[] listOfFiles = file.listFiles();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					System.out.println(listOfFiles[i].getName());
+					new File(listOfFiles[i].toString()).delete();
+				}
+			}
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
 		}
 	}
 }

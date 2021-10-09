@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd' >
-<suite name="NopCommerce" parallel="false">
+<suite name="NopCommerce" parallel="false" >
+<!-- <suite name="NopCommerce" parallel="tests" thread-count = "3"> -->
 
 	<listeners>
+	    <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
 		<listener class-name = "commons.MethodListener"/>
+		<listener class-name = "reportConfig.ReportNGListener"/>
+<!-- 		<listener class-name = "reportConfig.ExtentReportListener"/>
+		<listener class-name = "reportConfig.ExtentTestListener"/> -->
 	</listeners>
 
 	<parameter name="url" value="https://demo.nopcommerce.com/" />
@@ -14,23 +20,27 @@
 			<!-- <class
 				name="com.nopcommerce.admin.Level_10_Upload_File"/> -->
 			<class
-				name="com.demonopcommerce.login.Level_12_Register_Assert_Verify"/>
+				name="com.demonopcommerce.login.Level_13_Register_Login_Page_Log_ReportHTML_ReportNG"/>
 		</classes>
 	</test>
 
-	<!-- <test name="RUN ON EDGE">
-		<parameter name="browser" value="edge" />
+<!-- 	<test name="RUN ON EDGE">
+		<parameter name="browser" value="edge_chromium" />
 		<classes>
 			<class
 				name="com.nopcommerce.admin.Level_10_Upload_File" />
+			<class
+				name="com.demonopcommerce.login.Level_13_Register_Login_Page_Log_ReportHTML_ReportNG"/>
 		</classes>
-	</test> -->
+	</test>
 
-	<!-- <test name="RUN ON CHROME">
+	<test name="RUN ON CHROME">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
 				name="com.nopcommerce.admin.Level_10_Upload_File" />
+			<class
+				name="com.demonopcommerce.login.Level_13_Register_Login_Page_Log_ReportHTML_ReportNG"/>
 		</classes>
 	</test> -->
 </suite> 
