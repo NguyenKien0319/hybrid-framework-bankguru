@@ -95,9 +95,9 @@ public class Level_13_Register_Login_Page_Log_ReportHTML_ReportNG extends BaseTe
 		// homePage.clickLogoutButton();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void AfterClass() {
-		driver.close();
+		closeBrowserAndDriver();
 	}
 
 	HomePageObject homePage;
