@@ -27,4 +27,9 @@ public class BasePageUI {
 	//WishListPage
 	public static final String ADD_TO_CART_CHECKBOX_BY_PRODUCTNAME = "//a[@class='product-name' and text()='%s']/parent::td//preceding-sibling::td[@class='add-to-cart']/input";
 	public static final String WISHLIST_ACTION_BUTTON = "//button[@class='button-2 %s-button']";
+	//Pattern Object
+	public static final String DYNAMIC_HEADER_BYNAME = "//div[@class='header']//a[text()= '%s']";
+	public static final String DYNAMIC_RADIO_BUTTON_BYNAME = "//label[text()='%s']/preceding-sibling::input";
+	public static final String DYNAMIC_TEXTBOX_BY_ID = "//input[@id='%s']";
+	public static final String DYNAMIC_BUTTON_BY_NAME = "//button[text()='%s']";
 }

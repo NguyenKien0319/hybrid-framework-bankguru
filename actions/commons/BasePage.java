@@ -635,6 +635,27 @@ public class BasePage {
 		return PageGeneratorManagement.getHomePage(driver);
 	}
 	
+	//Patern Object
+	public void clickToHeaderByName(WebDriver driver, String headerName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_HEADER_BYNAME, headerName);
+		clickToElement(driver, BasePageUI.DYNAMIC_HEADER_BYNAME, headerName);
+	}
+	
+	public void clickToRadioButtonByName(WebDriver driver, String buttonName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BYNAME, buttonName);
+		checkTheCheckBoxOrRadio(driver, BasePageUI.DYNAMIC_RADIO_BUTTON_BYNAME, buttonName);
+	}
+	
+	public void inputTextBoxByID(WebDriver driver, String ID, String value) {
+		waitForElementVisible(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, ID);
+		sendkeysToElement(driver, BasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, ID);
+	}
+	
+	public void clickButtonByName(WebDriver driver, String buttonName) {
+		waitForElementClickable(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, buttonName);
+		clickToElement(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, buttonName);
+	}
+	
 	private Alert alert;
 	private Select select;
 	private Actions action;

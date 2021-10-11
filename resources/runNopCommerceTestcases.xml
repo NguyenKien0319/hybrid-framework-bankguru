@@ -24,7 +24,7 @@
 			<!-- <class
 				name="com.demonopcommerce.login.Level_13_Register_Login_Page_Log_ReportHTML_ReportNG"/> -->
 			<class
-				name="com.demonopcommerce.login.Level_14_Register_Login_Page_Share_State"/>
+				name="com.demonopcommerce.login.Level_15_Register_Login_Page_Pattern_Object"/>
 		</classes>
 	</test>
 
