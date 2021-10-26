@@ -82,16 +82,19 @@ public class BasePage {
 
 	public void cancelAlert(WebDriver driver) {
 		waitElementPresence(driver);
+		alert = driver.switchTo().alert();
 		alert.dismiss();
 	}
 
 	public void senkeysToAlert(WebDriver driver, String value) {
 		waitElementPresence(driver);
+		alert = driver.switchTo().alert();
 		alert.sendKeys(value);
 	}
 
 	public String getTextToAlert(WebDriver driver) {
 		waitElementPresence(driver);
+		alert = driver.switchTo().alert();
 		return alert.getText();
 	}
 
@@ -654,6 +657,44 @@ public class BasePage {
 	public void clickButtonByName(WebDriver driver, String buttonName) {
 		waitForElementClickable(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, buttonName);
 		clickToElement(driver, BasePageUI.DYNAMIC_BUTTON_BY_NAME, buttonName);
+	}
+	
+	//Sort_sauce
+	public boolean isDataStringSortByASC_sauce(WebDriver driver, String locator) {
+		List<WebElement> elementLists = getElements(driver, locator);
+		List<String> productNames = elementLists.stream().map(n->n.getText()).collect(Collectors.toList()); 
+		List<String> sortProductNames = new ArrayList<String>(productNames);
+		Collections.sort(sortProductNames);
+		return productNames.equals(sortProductNames);
+	}
+	public boolean isDataStringSortByDESC_sauce(WebDriver driver, String locator) {
+		List<WebElement> elementLists = getElements(driver, locator);
+		List<String> productNames = elementLists.stream().map(n->n.getText()).collect(Collectors.toList()); 
+		List<String> sortProductNames = new ArrayList<String>(productNames);
+		Collections.sort(sortProductNames);
+		Collections.reverse(sortProductNames);
+		return productNames.equals(sortProductNames);
+	}
+	public boolean isDataFloatSortByASC_sauce(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elementLists = getElements(driver, locator);
+		for (WebElement element : elementLists) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
+		}
+		ArrayList<Float> sortFloat = new ArrayList<Float>(arrayList);
+		Collections.sort(sortFloat);
+		return arrayList.equals(sortFloat);
+	}
+	public boolean isDataFloatSortByDESC_sauce(WebDriver driver, String locator) {
+		ArrayList<Float> arrayList = new ArrayList<Float>();
+		List<WebElement> elementLists = getElements(driver, locator);
+		for (WebElement element : elementLists) {
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
+		}
+		ArrayList<Float> sortFloat = new ArrayList<Float>(arrayList);
+		Collections.sort(sortFloat);
+		Collections.reverse(sortFloat);
+		return arrayList.equals(sortFloat);
 	}
 	
 	private Alert alert;

@@ -206,3 +206,27 @@
 [INFO ] [2021-10-10 10:55:25,495]  -------------------------- PASSED -------------------------- 
 [INFO ] [2021-10-10 10:55:31,980] OS name = windows 10
 [INFO ] [2021-10-10 10:55:31,980] Driver instance name = windows 10
+[INFO ] [2021-10-11 07:27:07,279] User_Register_01: Verify go to HomePage success
+[INFO ] [2021-10-11 07:27:07,350] User_Register_02: Click to RegisterLink
+[INFO ] [2021-10-11 07:27:08,856] User_Register_03: Verify title Register Page display
+[INFO ] [2021-10-11 07:27:08,907]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-10-11 07:27:08,907] User_Register_04: Click to Male Gender radio button
+[INFO ] [2021-10-11 07:27:09,171] User_Register_05: Input FirstName textbox 'Automation' 
+[INFO ] [2021-10-11 07:27:09,227] User_Register_06: Input LastName textbox 'Testing' 
+[INFO ] [2021-10-11 07:27:09,285] User_Register_07: Input Email textbox'testing414298@hotmail.net'
+[INFO ] [2021-10-11 07:27:09,355] User_Register_08: Input Password textbox '123123'
+[INFO ] [2021-10-11 07:27:09,417] User_Register_09: Input ConfirmPassword textbox '123123'
+[INFO ] [2021-10-11 07:27:09,484] User_Register_10: Click Register button
+[INFO ] [2021-10-11 07:27:10,984] User_Register_11: Verify message Register success display
+[INFO ] [2021-10-11 07:27:11,043]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-10-11 07:27:11,043] User_Register_12: Click logout button
+[INFO ] [2021-10-11 07:27:13,413] User_Register_13: Verify Sider Homepage display
+[INFO ] [2021-10-11 07:27:13,472]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-10-11 07:27:13,483] User_Login_01: Go to Login screen
+[INFO ] [2021-10-11 07:27:14,740] User_Login_02: Input Email textbox 'testing414298@hotmail.net'
+[INFO ] [2021-10-11 07:27:14,812] User_Login_03: Input Password textbox '123123'
+[INFO ] [2021-10-11 07:27:14,880] User_Login_03: click Login button
+[INFO ] [2021-10-11 07:27:15,760] User_Login_04: Verify Slide Homepage display
+[INFO ] [2021-10-11 07:27:15,815]  -------------------------- PASSED -------------------------- 
+[INFO ] [2021-10-11 07:27:15,816] OS name = windows 10
+[INFO ] [2021-10-11 07:27:15,816] Driver instance name = windows 10

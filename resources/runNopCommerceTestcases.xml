@@ -12,19 +12,21 @@
 		<listener class-name = "reportConfig.ExtentTestListener"/> -->
 	</listeners>
 
-	<parameter name="url" value="https://demo.nopcommerce.com/" />
+	<parameter name="url" value="https://www.saucedemo.com/" />
 
 	<test name="RUN ON FIREFOX">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<class
-				name="com.nopcommerce.common.Common_01_Register_And_Login"/>
+			<!-- <class
+				name="com.nopcommerce.common.Common_01_Register_And_Login"/> -->
 			<!-- <class
 				name="com.nopcommerce.admin.Level_10_Upload_File"/> -->
 			<!-- <class
 				name="com.demonopcommerce.login.Level_13_Register_Login_Page_Log_ReportHTML_ReportNG"/> -->
+			<!-- <class
+				name="com.demonopcommerce.login.Level_15_Register_Login_Page_Pattern_Object"/> -->
 			<class
-				name="com.demonopcommerce.login.Level_15_Register_Login_Page_Pattern_Object"/>
+				name="com.saucedemo.sort.Level_17_Sort_Displaying"/>
 		</classes>
 	</test>
 

@@ -1,6 +1,0 @@
-[INFO ] [2021-10-10 10:55:17,524] Init Browser 'firefox' and Open appUrl 'https://demo.nopcommerce.com/'
-[INFO ] [2021-10-10 10:55:21,711] Pre-condition - Step_01: Set Cookies Login
-[INFO ] [2021-10-10 10:55:25,450] User_Login_01: Verify Sider Homepage display
-[INFO ] [2021-10-10 10:55:25,495]  -------------------------- PASSED -------------------------- 
-[INFO ] [2021-10-10 10:55:31,980] OS name = windows 10
-[INFO ] [2021-10-10 10:55:31,980] Driver instance name = windows 10
